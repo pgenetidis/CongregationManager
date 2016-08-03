@@ -1,0 +1,266 @@
+<div ng-controller="LivingAndServiceCtrl" ng-init="currentWeek();">
+<div class="row">
+    <div class="col-lg-12" >
+        <div class="page-header">
+        <h1>Ζωή και Διακονία {{firstday.getDate()}} – {{lastday.getDate()}} {{month}}
+            <div style="float: right;">
+                <button type="submit" class="btn btn-info" ng-click="weekBefore();"><<</button>
+                <button type="submit" class="btn btn-info" ng-click="nextWeek();">>></button>
+                <button type="submit" class="btn btn-info" ng-click="currentWeek();">Τρέχουσα εβδομάδα</button>
+                <button type="submit" class="btn btn-info" ng-click="print();">Print</button>
+                <button type="submit" class="btn btn-info" ng-click="newThemeBox();">New Box</button>
+            </div>
+        </h1>
+    </div>
+
+
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="panel-body">
+    <div class="row">
+        <div class="form-group col-lg-12 col-xs-12" ng-repeat="box in data.themeboxes | orderBy:'positionIndex'">
+            <div class="panel panel-default">
+                <form class="form-horizontal form-validation">
+                    <div class="panel-heading" style="background-color: {{box.headercolor}}; color:white;"><strong>{{box.boxname}}</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group" ng-repeat="o in data.boxfields | filter: {themeboxid: box.id}  | orderBy:'boxfieldindex'">
+                            <label class="col-sm-3 control-label">{{o.boxfieldname}}</label>
+                            <div class="col-sm-9" ng-if="o.fieldsource == 'congregationgroups'">
+                                <select ng-model="o.fieldValue"
+                                        ng-options="o.groupname as o.groupname for o in group | orderBy:'groupname'" required>
+                                </select>
+                            </div>
+                            <div class="col-sm-9" ng-if="o.fieldsource != 'congregationgroups'">
+                                <select ng-model="o.fieldValue"
+                                        ng-options="o.shortname as o.shortname for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">΄Υμνος και Προσευχή</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.first.pray"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Εισαγωγικά Σχόλια</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.first.comment"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <div class="formEndInfo pull-left m-l-n" ng-show="saveProgress == 'data_personal'">
+                            <i class="icon icon-refresh"></i> Speichern ...
+                        </div>
+                        <div class="formEndInfo pull-left text-success m-l-n"
+                             ng-show="saveSuccess == 'data_personal'">
+                            <i class="fa fa-check"></i> Gespeichert
+                        </div>
+                        <div class="formEndInfo pull-left text-info m-l-n"
+                             ng-show="formPersonal.$error.pattern">
+                            <i class="fa fa-times"></i> Ungültige Eingabe
+                        </div>
+                        <button type="submit" class="btn btn-info" ng-click="saveData()"
+                                ng-disabled="formPersonal.$pristine || formPersonal.$invalid || saveProgress">Speichern
+                        </button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        <!--
+        <div class="form-group col-lg-12 col-xs-12">
+            <div class="panel panel-default">
+                <form name="formPersonal" class="form-horizontal form-validation">
+                    <div class="panel-heading" style="background-color: #5f6a70; color: white;"><strong>ΘΗΣΑΥΡΟΊ ΑΠΟ ΤΟΝ ΛΌΓΟ ΤΟΥ ΘΕΟΎ</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">1ο</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.treasureFirst"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Σκάβουμε για Πνευματικά Πετράδια</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.stones"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ανάγνοση της Αγίας Γραφής</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.bible"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <div class="formEndInfo pull-left m-l-n" ng-show="saveProgress == 'data_personal'">
+                            <i class="icon icon-refresh"></i> Speichern ...
+                        </div>
+                        <div class="formEndInfo pull-left text-success m-l-n"
+                             ng-show="saveSuccess == 'data_personal'">
+                            <i class="fa fa-check"></i> Gespeichert
+                        </div>
+                        <div class="formEndInfo pull-left text-info m-l-n"
+                             ng-show="formPersonal.$error.pattern">
+                            <i class="fa fa-times"></i> Ungültige Eingabe
+                        </div>
+                        <button type="submit" class="btn btn-info" ng-click="saveData('data_personal')"
+                                ng-disabled="formPersonal.$pristine || formPersonal.$invalid || saveProgress">Speichern
+                        </button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-12 col-xs-12">
+            <div class="panel panel-default">
+                <form name="formPersonal" class="form-horizontal form-validation">
+                    <div class="panel-heading" style="background-color: #B18532; color: white;"><strong>ΑΠΟΤΕΛΕΣΜΑΤΙΚΟΤΗΤΑ ΣΤΗΝ ΔΙΑΚΟΝΙΑ ΑΓΡΟΥ</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Προετοιμάστε τις Παρουσιάσεις του Μήνα</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.presentations"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Αρχηκή Επίσκεψη</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.visit"
+                                        ng-options="o as o for o in persons" required
+                                        ng-disable="data.personal.presentations != ''">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Επανεπίσκεψη</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.revisit"
+                                        ng-options="o as o for o in persons" required
+                                        ng-disable="data.personal.presentations != ''">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Γραφική Μελέτη</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.bibleStudy"
+                                        ng-options="o as o for o in persons" required
+                                        ng-disable="data.personal.presentations != ''">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Αναγνώστης Γραφικής Μελέτης</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.bibleStudyReader"
+                                        ng-options="o as o for o in persons" required
+                                        ng-disable="data.personal.presentations != ''">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <div class="formEndInfo pull-left m-l-n" ng-show="saveProgress == 'data_personal'">
+                            <i class="icon icon-refresh"></i> Speichern ...
+                        </div>
+                        <div class="formEndInfo pull-left text-success m-l-n"
+                             ng-show="saveSuccess == 'data_personal'">
+                            <i class="fa fa-check"></i> Gespeichert
+                        </div>
+                        <div class="formEndInfo pull-left text-info m-l-n"
+                             ng-show="formPersonal.$error.pattern">
+                            <i class="fa fa-times"></i> Ungültige Eingabe
+                        </div>
+                        <button type="submit" class="btn btn-info" ng-click="saveData('data_personal')"
+                                ng-disabled="formPersonal.$pristine || formPersonal.$invalid || saveProgress">Speichern
+                        </button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+
+        <div class="form-group col-lg-12 col-xs-12">
+            <div class="panel panel-default">
+                <form name="formPersonal" class="form-horizontal form-validation">
+                    <div class="panel-heading" style="background-color: #801c2a; color: white;"><strong>ΠΩΣ ΖΟΥΜΕ ΟΣ ΧΡΙΣΤΙΑΝΟΙ</strong></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">1ο</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.livAsChristFirst"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Εκκλησιαστική Γραφική Μελέτη</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.churchBibleStudy"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Ανασκόπηση και Πρόγευση της επόμενης Εβδομάδας</label>
+
+                            <div class="col-sm-9">
+                                <select ng-model="data.personal.review"
+                                        ng-options="o as o for o in persons" required>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <div class="formEndInfo pull-left m-l-n" ng-show="saveProgress == 'data_personal'">
+                            <i class="icon icon-refresh"></i> Speichern ...
+                        </div>
+                        <div class="formEndInfo pull-left text-success m-l-n"
+                             ng-show="saveSuccess == 'data_personal'">
+                            <i class="fa fa-check"></i> Gespeichert
+                        </div>
+                        <div class="formEndInfo pull-left text-info m-l-n"
+                             ng-show="formPersonal.$error.pattern">
+                            <i class="fa fa-times"></i> Ungültige Eingabe
+                        </div>
+                        <button type="submit" class="btn btn-info" ng-click="saveData('data_personal')"
+                                ng-disabled="formPersonal.$pristine || formPersonal.$invalid || saveProgress">Speichern
+                        </button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
+</div>
