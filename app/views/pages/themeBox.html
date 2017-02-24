@@ -16,7 +16,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr st-select-row="box" ng-repeat="box in themeboxes | orderBy : 'positionIndex'">
+                    <tr st-select-row="box" style="background-color: {{box.headercolor}}" ng-repeat="box in themeboxes | orderBy : 'positionIndex'">
                         <td >{{box.boxname}}</td>
                         <td>{{box.positionIndex}}</td>
 
@@ -45,6 +45,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group col-md-8" ng-show="selectedBox">
             <div class="panel panel-default">
                 <form name="formPersonal" class="form-horizontal form-validation">
@@ -75,6 +76,7 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <!--
                             <label class="col-sm-3 control-label">
                                 Fields
                                 <a tooltip-placement="bottom" tooltip=''>
@@ -92,6 +94,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col-sm-4">
                                 <div class="input-group">
                                     <select class="form-control" ng-model="fields[$index].fieldsource" style="margin-bottom: 5px;"
@@ -100,11 +103,53 @@
                                     </select>
                                 </div>
                             </div>
+                            -->
+                            <div class="panel panel-default">
+                                <div class="table-container">
+
+                                    <table class="table st-table table-striped" name="tabel" st-table="values" st-safe-src="fields">
+                                        <thead>
+                                        <tr>
+                                            <th st-sort="boxname">Box name</th>
+                                            <th st-sort="boxname">Inhalt</th>
+                                            <th st-sort="boxname">Position</th>
+
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr st-select-row="val" ng-repeat="val in values | orderBy : 'positionIndex'">
+                                            <td ><input type="text" class="form-control" ng-model="val.boxfieldname"></td>
+                                            <td>
+                                                <select class="form-control" ng-model="val.fieldsource" style="margin-bottom: 5px;"
+                                                        ng-options="o as o for o in fieldtypes" required>
+                                                </select>
+                                            </td>
+                                            <td ><input type="text" class="form-control" ng-model="val.boxfieldindex"></td>
+                                        </tr>
+                                        </tbody>
+                                        <tfoot>
+                                        <tr >
+                                            <td colspan="3" align="right">
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="addNewField()" ><i class="fa fa-plus"></i>Neu</button>
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="delete = true"><i
+                                                        class="fa fa-trash-o"></i>Löschen
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" align="right" ng-hide="delete != true">
+                                                <span class="text-dark wrapper-xs v-middle pull-left">Sure?</span>
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="deleteBox(); delete = false;" >Ja</button>
+                                                <button class="btn m-b-xs btn-sm btn-info btn-addon" ng-click="delete = false;">Nein
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-
-
                     <footer class="panel-footer text-right bg-light lter">
                         <div class="btn pull-left m-l-n">
                                         <span>

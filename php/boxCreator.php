@@ -8,11 +8,52 @@
        $boxInfo = $boxInfo->fetchAll();
 
        if (count($boxInfo) == 1){
+            try{
+                $q = "UPDATE themeboxes SET boxname=:boxname, positionIndex=:positionIndex, headercolor=:headercolor WHERE id='$data->id'";
+                $query = $db->prepare($q);
 
+                $execute = $query->execute(array(
+                    ":boxname" => $data->boxname,
+                    ":positionIndex" => $data->positionIndex,
+                    ":headercolor" => $data->headercolor
+                ));
 
+                foreach($data->fields as $field) {
 
+                    $info = $db->query("SELECT * FROM boxfields WHERE id='$field->id'");
+                    $info = $info->fetchAll();
 
-       }
+                    if (count($info) == 1){
+                        $q2 = "UPDATE boxfields SET boxfieldname=:boxfieldname, fieldsource=:fieldsource, boxfieldindex=:boxfieldindex WHERE id='$field->id'";
+                        $query = $db->prepare($q2);
+
+                        $execute = $query->execute(array(
+                            ":boxfieldname" => $field->boxfieldname,
+                            ":fieldsource" => $field->fieldsource,
+                            ":boxfieldindex" => $field->boxfieldindex,
+                        ));
+                    }
+                    else
+                    {
+                        $q3 = "INSERT INTO boxfields (boxfieldname, themeboxid, boxfieldindex, fieldsource) VALUES (:boxfieldname, :themeboxid, :boxfieldindex, :fieldsource)";
+                        $query = $db->prepare($q3);
+
+                        $execute = $query->execute(array(
+                            ":boxfieldname" => $field->boxfieldname,
+                            ":themeboxid" => $boxInfo2[0]['id'],
+                            ":boxfieldindex" => $field->boxfieldindex,
+                            ":fieldsource" => $field->fieldsource
+                        ));
+
+                    }
+                }
+            }
+            catch(PDOException $e)
+            {
+                $array = ['error' => $e->getMessage()];
+                echo json_encode($array);
+            }
+        }
        else{
             try{
                 $q = "INSERT INTO themeboxes (boxname, boxpage, clientId, positionIndex, headercolor) VALUES (:boxname, :boxpage, :clientId, :positionIndex, :headercolor)";
@@ -31,16 +72,16 @@
 
                 if (count($boxInfo2) == 1){
 
-                    $count = 0;
+
                     foreach($data->fields as $field) {
-                        $count = $count + 1;
+
                         $q3 = "INSERT INTO boxfields (boxfieldname, themeboxid, boxfieldindex, fieldsource) VALUES (:boxfieldname, :themeboxid, :boxfieldindex, :fieldsource)";
                         $query = $db->prepare($q3);
 
                         $execute = $query->execute(array(
                             ":boxfieldname" => $field->boxfieldname,
                             ":themeboxid" => $boxInfo2[0]['id'],
-                            ":boxfieldindex" => $count,
+                            ":boxfieldindex" => $field->boxfieldindex,
                             ":fieldsource" => $field->fieldsource
                         ));
 

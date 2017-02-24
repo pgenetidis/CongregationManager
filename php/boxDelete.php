@@ -13,11 +13,14 @@
        try{
             $q = "DELETE FROM themeboxes WHERE id=:id";
             $query = $db->prepare($q);
-
             $execute = $query->execute(array(
-                        ":id" => $data->id,
-
-                    ));
+                ":id" => $data->id,
+            ));
+            $q2 = "DELETE FROM boxfields WHERE themeboxid=:id";
+                        $query = $db->prepare($q2);
+                        $execute = $query->execute(array(
+                            ":id" => $data->id,
+                        ));
        }
        catch(PDOException $e)
        {

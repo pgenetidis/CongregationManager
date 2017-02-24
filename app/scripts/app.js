@@ -131,11 +131,25 @@ angular.module('versammlung.admin', [
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name:'versammlung.admin',
-                        files:['scripts/controllers/trolleyController.js']
+                        files:['scripts/controllers/trolleyController.js',
+                            'scripts/services/trolleyService.js']
                     })
                 }
             }
-    })
+        })
+        .state('dashboard.trolleyPlace',{
+            templateUrl:'views/pages/trolleyPlace.html',
+            url:'/trolley',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'versammlung.admin',
+                        files:['scripts/controllers/trolleyPlaceController.js',
+                            'scripts/services/trolleyPlaceService.js']
+                    })
+                }
+            }
+        })
       .state('dashboard.livingAndService',{
         templateUrl:'views/pages/livingAndService.html',
             data: {
@@ -152,6 +166,10 @@ angular.module('versammlung.admin', [
                                 'scripts/services/headerService.js',
                                 'scripts/controllers/livingAndServiceController.js',
                                 'scripts/controllers/themeBoxController.js',
+                                'js/jsPDF/jspdf.debug.js',
+                                'js/jsPDF/html2canvas.js',
+                                'js/jsPDF/canvas2image.js',
+
                                 'scripts/controllers/livingAndServiceReportController.js',
                                 'scripts/services/usersListService.js',
                                 'scripts/services/livingandServiceService.js',
@@ -167,7 +185,13 @@ angular.module('versammlung.admin', [
             loadMyFiles:function($ocLazyLoad) {
                 return $ocLazyLoad.load({
                     name:'versammlung.admin',
-                    files:['scripts/controllers/watchtowerController.js']
+                    files:['scripts/controllers/header.js',
+                        'scripts/services/headerService.js',
+                        'scripts/controllers/watchtowerController.js',
+                        'scripts/services/watchtowerService.js',
+                        'scripts/controllers/themeBoxController.js',
+                        'scripts/services/usersListService.js',
+                        'scripts/services/boxEditorService.js']
                 })
             }
         }
@@ -199,6 +223,20 @@ angular.module('versammlung.admin', [
             }
         }
     })
+        .state('dashboard.trolley_settings',{
+            templateUrl:'views/pages/trolley_settings.html',
+            url:'/trolley_settings',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'versammlung.admin',
+                        files:['scripts/controllers/trolleySettingsController.js',
+                            'scripts/services/trolleySettingsService.js',
+                            'scripts/controllers/editTrolleyController.js']
+                    })
+                }
+            }
+        })
 
       .state('dashboard.table',{
         templateUrl:'views/table.html',
@@ -230,5 +268,4 @@ angular.module('versammlung.admin', [
    })
   }]);
 var app = angular.module('versammlung.admin');
-app.serviceBase = '/VersamlungsVerwaltung/';
-    
+app.serviceBase = '/CongregationManager.git/trunk/';

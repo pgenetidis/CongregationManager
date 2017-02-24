@@ -18,8 +18,7 @@ app.controller('LivingAndServiceCtrl', ["$scope", "$state","principal", "$modal"
         $scope.group = [];
         $scope.roles = [];
         $scope.pageName = $state.current.url.split('/')[1];
-
-
+        $scope.data = null;
 
 
 
@@ -130,8 +129,10 @@ app.controller('LivingAndServiceCtrl', ["$scope", "$state","principal", "$modal"
 
 
         };
-        $scope.alertios = function(){
-            alert("hallo");
+        $scope.saveData = function(box){
+
+            var tst = $scope.data;
+
         };
         $scope.weekBefore = function(){
 

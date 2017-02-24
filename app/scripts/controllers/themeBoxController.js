@@ -63,9 +63,7 @@ app.controller('ThemeBoxCtrl', ['$scope', '$timeout', 'principal','$state','$mod
             });
         };
 
-        $scope.addSuffixField = function () {
-            $scope.mailSuffixes.push('');
-        };
+
         $scope.addNewField = function () {
                 $scope.fields.push(new Object());
 

@@ -57,18 +57,34 @@ app.controller('LivingAndServiceReportCtr', ["$scope",
         };
         $scope.printDoc = function(){
 
-            $("#print-content").printThis({
-                debug: false,
-                importCSS: true,
-                importStyle: true,
-                printContainer: true,
-                loadCSS: "",
-                pageTitle: "",
-                removeInline: false,
-                printDelay: 333,
-                header: null,
-                formValues: true
+//            $("#print-content").printThis({
+//                debug: false,
+//                importCSS: true,
+//                importStyle: true,
+//                printContainer: true,
+//                loadCSS: "",
+            //                pageTitle: "",
+             //   removeInline: false,
+             //   printDelay: 333,
+             //   header: null,
+             //   formValues: true
+            //});
+
+
+
+
+            var doc = new jsPDF('p', 'mm', [297, 210]);
+                doc.addHTML($("#print-content"), function() {
+                    doc.addPage();
+                    doc.addHTML($("#print-content"),function(){
+                        doc.save("test.pdf");
+                    });
+
             });
+
+
+
+
 
         }
 
