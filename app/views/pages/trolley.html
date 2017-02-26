@@ -8,9 +8,11 @@
 <div class="row" ng-controller="TrolleyCtrl" ng-init="init();">
     <div class="col-sm-6" ng-repeat="place in data">
         <div class="panel panel-default">
-            <div class="panel-heading" style="background-color: white; border: 0px;">
-
-            <a ui-sref="dashboard.trolleyPlace">{{place.name}}</a>
+            <div class="panel-heading text-center" style="background-color: white; border: 0px;">
+                <div class="panel-body">
+                    <a ui-sref="dashboard.trolleyPlace({placeId: place.id,placeName:place.name})"><div class="circular"></div></a>
+                    <a ui-sref="dashboard.trolleyPlace({placeId: place.id,placeName:place.name})"><h2 class="control-label">{{place.name}}</h2></a>
+                </div>
             </div>
         </div>
     </div>

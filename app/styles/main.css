@@ -143,3 +143,18 @@ tr.st-selected {
     background-color: #6888BC;
     color:white;
 }
+
+.circular {
+
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    border-radius: 150px;
+    -webkit-border-radius: 150px;
+    -moz-border-radius: 150px;
+    background-image: url("../images/map.svg");
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+

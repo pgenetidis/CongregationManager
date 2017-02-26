@@ -32,6 +32,10 @@ app.factory('principal', ['$q', '$http', '$timeout', '$window', '$cookieStore', 
 
                 return false;
             },
+            getIdentity: function () {
+
+                return _identity;
+            },
             authenticate: function (identity) {
                 _identity = identity;
                 _authenticated = identity != null;

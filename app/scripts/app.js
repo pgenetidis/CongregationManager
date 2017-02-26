@@ -139,7 +139,11 @@ angular.module('versammlung.admin', [
         })
         .state('dashboard.trolleyPlace',{
             templateUrl:'views/pages/trolleyPlace.html',
-            url:'/trolley',
+            url:'/trolleyPlace/{placeId}/{placeName}',
+            params: {
+                placeId: { value: null },
+                placeName: { value : null }
+            },
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({

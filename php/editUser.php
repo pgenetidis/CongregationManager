@@ -14,7 +14,7 @@
         $roleNameId = json_encode($roleId[0]);
         $tmp = json_decode($roleNameId);
 
-        $q = "UPDATE users SET firstname=:firstname, lastname=:lastname,email=:email,roleId=:roleId,shortname=:shortname WHERE userId=:userId";
+        $q = "UPDATE users SET firstname=:firstname, lastname=:lastname,email=:email,roleId=:roleId,shortname=:shortname,trolley=:trolley WHERE userId=:userId";
         $query = $db->prepare($q);
 
         $execute = $query->execute(array(
@@ -23,7 +23,8 @@
             ":email" => $user->email,
             ":userId" => $user->userId,
             ":roleId" => $tmp->roleId,
-            ":shortname" => $user->shortname
+            ":shortname" => $user->shortname,
+            ":trolley" => $user->trolley
         ));
 
 

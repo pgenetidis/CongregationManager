@@ -9,11 +9,6 @@
 app.controller('TrolleyCtrl',['$scope','principal','trolleyService','headerService',
     function($scope,principal,trolleyService,headerService) {
 
-
-        $scope.time = [];
-
-
-
         $scope.monthNames = ["Ιανουαρίου", "Φεβρουαρίου", "Μαρτίου", "Απριλίου", "Μαίου", "Ιουνίου",
             "Ιουλίου", "Αυγούστου", "Σεπτεμβρίου", "Οκτωμβρίου", "Νοεμβρίου", "Δεκεμβρίου"
         ];

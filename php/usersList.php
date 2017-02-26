@@ -1,7 +1,7 @@
 <?php
 
         include("dbcon.php");
-    	$userInfo = $db->query("SELECT a.userId, a.firstname, a.lastname, a.shortname, a.email, a.clientId, b.roleName, a.token, c.id as groupId, c.groupname from users as a, userRoles as b, congregationGroups as c WHERE b.roleId = a.roleId AND c.id = a.congregationsGroupId");
+    	$userInfo = $db->query("SELECT a.userId, a.firstname, a.lastname, a.shortname, a.email, a.clientId, a.trolley, b.roleName, a.token, c.id as groupId, c.groupname from users as a, userRoles as b, congregationGroups as c WHERE b.roleId = a.roleId AND c.id = a.congregationsGroupId");
         $userInfo = $userInfo->fetchAll();
 
         $userRolesInfo = $db->query("SELECT * from userRoles");

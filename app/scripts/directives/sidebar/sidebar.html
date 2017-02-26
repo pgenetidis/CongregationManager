@@ -45,9 +45,9 @@
             -->
 
             <li ng-class="{active: collapseVar==1}">
-                <a href="" ng-click="check(1)"><i class="fa fa-sitemap fa-fw"></i> Συνάθρησης<span
+                <a href="" ng-click="check(1);"><i class="fa fa-sitemap fa-fw"></i> Συνάθρησης<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar==1">
+                <ul class="nav nav-second-level" collapse="collapseVar!=1">
                     <li ui-sref-active="active">
                         <a ui-sref="dashboard.livingAndService"> Ζωή και Διακονία</a>
                     </li>

@@ -25,7 +25,7 @@ app.controller('LoginCtrl', ['$scope', '$state','loginService', 'principal',
                 }
                 else{
                     principal.authenticate($scope.result);
-                    $state.go('dashboard.livingAndService');
+                    $state.go('dashboard.trolley');
                 }
             });
         };
