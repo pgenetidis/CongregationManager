@@ -2,7 +2,7 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav in" id="side-menu">
             <li ui-sref-active="active">
-                <a ui-sref="dashboard.trolley"><i class="fa fa-users fa-fw"></i> Trolley</a>
+                <a ui-sref="dashboard.trolley"><i class="fa fa-street-view fa-fw"></i> Trolley</a>
             </li>
             <!--
             <li ui-sref-active="active">
@@ -44,7 +44,7 @@
             </li>
             -->
 
-            <li ng-class="{active: collapseVar==1}">
+            <li ng-class="{active: collapseVar==1}" ng-show="principal.isInRole('clientAdmin') || principal.isInRole('eldest')">
                 <a href="" ng-click="check(1);"><i class="fa fa-sitemap fa-fw"></i> Συνάθρησης<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=1">
@@ -81,7 +81,7 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==2}">
+            <li ng-class="{active: collapseVar==2}" ng-show="principal.isInRole('clientAdmin') || principal.isInRole('eldest')">
                 <a href="" ng-click="check(2)"><i class="fa fa-volume-up fa-fw"></i> Υχιτικά<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=2">
@@ -119,7 +119,7 @@
                         <a ui-sref="dashboard.users"><i class="fa fa-user-plus"> Users</i></a>
                     </li>
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.trolley_settings"><i class="fa fa-user-plus"> Trolley Εφαρμογές</i></a>
+                        <a ui-sref="dashboard.trolley_settings"><i class="fa fa-street-view"> Trolley Εφαρμογές</i></a>
                     </li>
 
 

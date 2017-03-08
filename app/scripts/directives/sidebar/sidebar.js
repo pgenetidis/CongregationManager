@@ -13,8 +13,7 @@ angular.module('versammlung.admin')
       templateUrl:'scripts/directives/sidebar/sidebar.html',
       restrict: 'E',
       replace: true,
-      scope: {
-      },
+      scope: {},
       controller:function($scope,$state,principal){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;

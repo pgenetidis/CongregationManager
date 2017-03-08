@@ -5,11 +5,11 @@
         $user = json_decode(file_get_contents("php://input"));
         $password = sha1($user>password);
         $email = $user->email;
-        $clientId = $user->clientId;
 
 
 
-        $userInfo = $db->query("SELECT * FROM users WHERE email='$email' AND password='$password' AND clientId='$clientId'");
+
+        $userInfo = $db->query("SELECT * FROM users WHERE email='$email' AND password='$password'");
         $userInfo = $userInfo->fetchAll();
 
     	$token;
@@ -18,13 +18,12 @@
 
     		$token = $email . " | " . uniqid() . uniqid() . uniqid();
 
-    	    $q = "UPDATE users SET token=:token WHERE email=:email AND password=:password AND clientId=:clientId";
+    	    $q = "UPDATE users SET token=:token WHERE email=:email AND password=:password";
     	    $query = $db->prepare($q);
     	    $execute = $query->execute(array(
     		    ":token" => $token,
     		    ":email" => $email,
-    		    ":password" => $password,
-    		    ":clientId" => $clientId
+    		    ":password" => $password
     	    ));
 
 

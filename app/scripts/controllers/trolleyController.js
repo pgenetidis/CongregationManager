@@ -6,8 +6,8 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
-app.controller('TrolleyCtrl',['$scope','principal','trolleyService','headerService',
-    function($scope,principal,trolleyService,headerService) {
+app.controller('TrolleyCtrl',['$scope','$modal','principal','trolleyService','headerService',
+    function($scope,$modal,principal,trolleyService,headerService) {
 
         $scope.monthNames = ["Ιανουαρίου", "Φεβρουαρίου", "Μαρτίου", "Απριλίου", "Μαίου", "Ιουνίου",
             "Ιουλίου", "Αυγούστου", "Σεπτεμβρίου", "Οκτωμβρίου", "Νοεμβρίου", "Δεκεμβρίου"
@@ -27,13 +27,30 @@ app.controller('TrolleyCtrl',['$scope','principal','trolleyService','headerServi
                         $state.go('login');
                 })
             }
-        $scope.loadPlaces = function(){
+        $scope.loadPlaces = function() {
             trolleyService.loadPlaces(principal.getClientId()).then(function (result) {
                 $scope.data = result.places;
                 $scope.trolleytime = result.trolleytime;
 
 
+
             });
-        };
+        }
+        $scope.viewMap = function(place){
+
+            var modalInstance = $modal.open({
+                templateUrl: 'views/pages/mapViewModal.html',
+                size: 'md',
+                controller: 'TrolleyModalCtrl',
+                resolve: {
+                    map: function () {
+                        return $scope.map;
+                    },
+                    place:function () {
+                        return place;
+                    }
+                }
+            });
+        }
     }
 ]);

@@ -12,6 +12,11 @@ angular.module('versammlung.admin')
         templateUrl:'scripts/directives/header/header-notification/header-notification.html',
         restrict: 'E',
         replace: true,
+		scope: {},
+			controller:function($scope,$state,principal){
+				$scope.currentUser = principal.getIdentity();
+
+			}
     	}
 	});
 

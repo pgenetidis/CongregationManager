@@ -1,7 +1,5 @@
 /* Space out content a bit */
-body {
-    padding-bottom: 20px;
-}
+
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -157,4 +155,14 @@ tr.st-selected {
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
+.usertable td{
+    background-color: #6888BC;
+    color:white;
+    border:0;
+
+}
+.hand a:hover{
+    cursor:hand;
+}
+
 

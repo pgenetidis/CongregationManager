@@ -19,7 +19,7 @@ app.controller('LoginCtrl', ['$scope', '$state','loginService', 'principal',
             loginService.login($scope.user).then(function (data) {
                 $scope.result = data;
 
-                if ($scope.result.error != undefined) {
+                if ($scope.result.error != undefined || null == data) {
 
                     $scope.errorMsg = $scope.result.error;
                 }
@@ -45,7 +45,7 @@ app.controller('LoginCtrl', ['$scope', '$state','loginService', 'principal',
                 }
                 else{
                     console.log($scope.result);
-                }
+            }
             });
         };
     }]

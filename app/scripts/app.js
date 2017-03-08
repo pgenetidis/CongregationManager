@@ -132,7 +132,8 @@ angular.module('versammlung.admin', [
                     return $ocLazyLoad.load({
                         name:'versammlung.admin',
                         files:['scripts/controllers/trolleyController.js',
-                            'scripts/services/trolleyService.js']
+                            'scripts/services/trolleyService.js',
+                            'scripts/controllers/trolleyModalCtrl.js',]
                     })
                 }
             }
@@ -149,6 +150,7 @@ angular.module('versammlung.admin', [
                     return $ocLazyLoad.load({
                         name:'versammlung.admin',
                         files:['scripts/controllers/trolleyPlaceController.js',
+                            'scripts/controllers/addUserAdminModelModalCtrl.js',
                             'scripts/services/trolleyPlaceService.js']
                     })
                 }
