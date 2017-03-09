@@ -12,7 +12,7 @@
         <table class="table st-table table-striped" name="tabel" st-table="displayedUserList" st-safe-src="userList">
             <thead>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="5">
                         <input st-search placeholder="Suche" class="input-sm form-control" ng-model="searchPattern" type="search">
                     </td>
                     <td colspan="1">
@@ -22,12 +22,13 @@
                 <tr>
                     <th st-sort="firstname" style="min-width:150px;">Όνομα</th>
                     <th st-sort="lastname" style="min-width:150px;">Επώνιμο</th>
-                    <th st-sort="groupname" style="min-width:150px;">Όμιλος</th>
+                    <!--<th st-sort="groupname" style="min-width:150px;">Όμιλος</th> -->
                     <th st-sort="email" style="min-width:155px;" >Ε-Μάιλ</th>
                     <th st-sort="roleName">Τρόλεϊ</th>
                     <th st-sort="roleName">Ρόλλος</th>
-                    <th st-sort="token">Logged-In</th>
-                    <th>Edit</th>
+                 <!--   <th st-sort="token">Συνδεδεμένος</th> -->
+                    <th>Επεξεργασία</th>
+                    <th width="20px">Αποστολή Κωδικού</th>
                 </tr>
             </thead>
             <tbody>
@@ -35,15 +36,16 @@
 
                     <td>{{user.firstname}}</td>
                     <td>{{user.lastname}}</td>
-                    <td>{{user.groupname}}</td>
+                 <!--   <td>{{user.groupname}}</td> -->
                     <td>{{user.email}}</td>
                     <td ng-if="user.trolley == '0'">Όχι</td>
                     <td ng-if="user.trolley == '1'">Ναί</td>
                     <td>{{user.roleName}}</td>
 
-                    <td ng-if="user.token == 'LOGGED OUT' || user.token == ''">Όχι</td>
-                    <td ng-if="user.token != 'LOGGED OUT' && user.token != ''">Ναί</td>
+                <!--    <td ng-if="user.token == 'LOGGED OUT' || user.token == ''">Όχι</td>
+                    <td ng-if="user.token != 'LOGGED OUT' && user.token != ''">Ναί</td> -->
                     <td><button ng-show="checkRoles();" class="btn btn-sm btn-info btn-xs" ng-click="edit(user);"><i class="fa fa-pencil-square-o"></i></button></td>
+                    <td><button ng-show="checkRoles();" class="btn btn-sm btn-info btn-xs" ng-click="sendActivation(user);"><i class="fa fa-envelope"></i></button></td>
 
                 </tr>
             </tbody>

@@ -215,6 +215,22 @@ angular.module('versammlung.admin', [
                 }
             }
     })
+        .state('activate',{
+            templateUrl:'views/pages/activateUser.html',
+            url:'/activate/{key}',
+            params: {
+                key: { value: null }
+            },
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'versammlung.admin',
+                        files:['scripts/controllers/activateUserCtrl.js',
+                            'scripts/services/activateUserService.js']
+                    })
+                }
+            }
+        })
     .state('dashboard.users',{
         templateUrl:'views/pages/users.html',
         url:'/users',

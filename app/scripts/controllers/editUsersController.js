@@ -13,7 +13,7 @@ app.controller('EditUsersCtrl', ['$scope', 'principal','$modalInstance','user','
         $scope.roles = roles;
         $scope.congregationList = congregationList;
         $scope.congregationGroups = congregationGroups;
-        $scope.type=type;
+        $scope.type = type;
         $scope.clientId;
 
 

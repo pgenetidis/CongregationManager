@@ -23,6 +23,9 @@ app.controller('LoginCtrl', ['$scope', '$state','loginService', 'principal',
 
                     $scope.errorMsg = $scope.result.error;
                 }
+                else if ($scope.result.active == 0){
+                    $scope.errorMsg = 'Η εγγραφή δεν ολοκληρώθηκε';
+                }
                 else{
                     principal.authenticate($scope.result);
                     $state.go('dashboard.trolley');

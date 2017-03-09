@@ -3,7 +3,7 @@
         include("dbcon.php");
         
         $user = json_decode(file_get_contents("php://input"));
-        $password = sha1($user>password);
+        $password = sha1($user->password);
         $email = $user->email;
 
 
@@ -28,7 +28,7 @@
 
 
 
-            $userInfo = $db->query("SELECT a.userId, a.firstname, a.lastname, a.email, a.clientId, a.token, b.roleName FROM users as a, userRoles as b WHERE b.roleId = a.roleId AND token = '$token'");
+            $userInfo = $db->query("SELECT a.userId, a.firstname, a.lastname, a.email, a.clientId, a.token, a.active, b.roleName FROM users as a, userRoles as b WHERE b.roleId = a.roleId AND token = '$token'");
             $userInfo = $userInfo->fetchAll();
 
 

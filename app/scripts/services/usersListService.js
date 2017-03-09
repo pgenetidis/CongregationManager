@@ -42,6 +42,19 @@ app.factory('usersListService', ['$http', '$q', function ($http, $q) {
 
         return def.promise;
     };
+    usersListServiceFactory.activateUser = function (user) {
+
+        var def = $q.defer();
+
+
+        $http.post(app.serviceBase + 'php/mail/sendUserActivation.php', user).success(function (data) {
+            def.resolve(data);
+        }).error(function (msg, code) {
+            def.reject({msg: msg, code: code});
+        });
+
+        return def.promise;
+    };
 
     return usersListServiceFactory;
 }]);

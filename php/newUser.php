@@ -11,7 +11,7 @@
             $roleNameId = json_encode($roleId[0]);
             $tmp = json_decode($roleNameId);
 
-            $q = "INSERT INTO users (email, password, firstname, lastname, clientId, roleId, token, shortname) VALUES (:email, :password, :firstname, :lastname, :clientId, :roleId, :token, :shortname)";
+            $q = "INSERT INTO users (email, password, firstname, lastname, clientId, roleId, token, shortname, trolley) VALUES (:email, :password, :firstname, :lastname, :clientId, :roleId, :token, :shortname, :trolley)";
             $query = $db->prepare($q);
 
             $execute = $query->execute(array(
@@ -22,7 +22,8 @@
                 ":clientId" => $user->clientId,
                 ":roleId" => $tmp->roleId,
                 ":token" => "LOGGED OUT",
-                ":shortname" => $user->shortname
+                ":shortname" => $user->shortname,
+                ":trolley" => $user->trolley
             ));
 
 

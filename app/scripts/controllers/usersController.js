@@ -57,7 +57,13 @@ app.controller('UsersCtrl', ['$scope', 'principal', '$modal','usersListService',
             congregationList = $scope.congregationList;
             congregationGroups = $scope.congregationGroups;
             var user = {
-                clientId:principal.getClientId()
+                clientId:principal.getClientId(),
+                email:'',
+                firstname:'',
+                lastname:'',
+                rolename:'',
+                shortname:'',
+                trolley:''
 
             };
 
@@ -82,6 +88,11 @@ app.controller('UsersCtrl', ['$scope', 'principal', '$modal','usersListService',
                         return 'newUser';
                     }
                 }
+            });
+        };
+        $scope.sendActivation = function(user){
+            usersListService.activateUser(user).then(function (data) {
+
             });
         };
         $scope.checkRoles = function(role){
